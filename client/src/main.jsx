@@ -11,6 +11,7 @@ import CoffeeDetails from './components/CoffeeDetails.jsx'
 import SignIn from './components/SignIn.jsx'
 import SignUp from './components/SignUp.jsx'
 import AuthProvider from './contexts/AuthProvider.jsx'
+import axios from 'axios'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-
+        loader : () =>axios(`${import.meta.env.VITE_API_URL}/coffees`),
         Component: Home,
       },
       {
