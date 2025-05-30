@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -20,15 +20,25 @@ const client = new MongoClient(process.env.MONGODB_URI, {
 async function run() {
   try {
     const coffeeCollection = client.db("coffee-store").collection("coffees");
+    //get all data
     app.get("/coffees", async (req, res) => {
       const allCoffees = await coffeeCollection.find().toArray();
       res.send(allCoffees);
     });
+    //add coffee data
     app.post("/add-coffee", async (req, res) => {
       const coffeeData = req.body;
       const result = await coffeeCollection.insertOne(coffeeData);
       res.send(result);
     });
+    //single coffee data
+    app.get("/coffee/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const coffee = await coffeeCollection.findOne(filter);
+      res.send(coffee);
+    });
+
     await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
