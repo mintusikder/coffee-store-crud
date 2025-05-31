@@ -38,6 +38,13 @@ async function run() {
       const coffee = await coffeeCollection.findOne(filter);
       res.send(coffee);
     });
+    //my-coffees single coffee data
+    app.get("/my-coffees/:email", async (req, res) => {
+      const email = req.params.email;
+      const filter = { email:email };
+      const coffees = await coffeeCollection.find(filter).toArray();
+      res.send(coffees);
+    });
 
     await client.db("admin").command({ ping: 1 });
     console.log(

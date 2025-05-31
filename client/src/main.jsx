@@ -12,6 +12,8 @@ import SignIn from "./components/SignIn.jsx";
 import SignUp from "./components/SignUp.jsx";
 import AuthProvider from "./contexts/AuthProvider.jsx";
 import axios from "axios";
+import MyAddedCoffees from "./components/MyAddedCoffees.jsx";
+import PrivateRoute from "./routes/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,15 @@ const router = createBrowserRouter([
 
         Component: UpdateCoffee,
       },
+      {
+        path: "my-added-coffees/:email",
+        loader: ({ params }) =>
+          axios(`${import.meta.env.VITE_API_URL}/my-coffees/${params?.email}`),
+        element : <PrivateRoute>
+          <MyAddedCoffees></MyAddedCoffees>
+        </PrivateRoute>
+      },
+
       {
         path: "signin",
         Component: SignIn,

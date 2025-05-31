@@ -4,14 +4,9 @@ import { useLoaderData } from "react-router";
 const CoffeeDetails = () => {
   const { data: coffee } = useLoaderData();
   const {
-    email,
     photo,
     details,
     price,
-    taste,
-    supplier,
-    quantity,
-    name,
     _id,
     likedBy,
   } = coffee || {};

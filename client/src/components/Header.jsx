@@ -42,8 +42,9 @@ const Header = () => {
                   <Link to='/addCoffee'>Add Coffee</Link>
                 </li>
                 <li>
-                  <Link to='/my-added-coffees'>My Added Coffee's</Link>
+                  <Link to={`/my-added-coffees/${user?.email}`}>My Added Coffee's</Link>
                 </li>
+                
                 <li>
                   <Link to='/my-orders'>My Orders</Link>
                 </li>
@@ -67,9 +68,9 @@ const Header = () => {
               <li>
                 <Link to='/addCoffee'>Add Coffee</Link>
               </li>
-              <li>
-                <Link to='/my-added-coffees'>My Added Coffee's</Link>
-              </li>
+             <li>
+                  <Link to={`/my-added-coffees/${user?.email}`}>My Added Coffee's</Link>
+                </li>
               <li>
                 <Link to='/my-orders'>My Orders</Link>
               </li>
